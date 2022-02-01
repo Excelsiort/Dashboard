@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+    api:
+        container_name: api
+        build: .
+        ports:
+            - 8080:8080
+        volumes: 
+            - ./:/usr/src/app
+            - /use/src/app/node_modules
+        environment: 
+            - PORT=8080
+    frontend:
+        build:
+            context: ./client
+            dockerfile: ./Dockerfile
+        ports:
+            - "3000:3000"
+        links:
+            - "api:be"
